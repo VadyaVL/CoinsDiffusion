@@ -6,7 +6,7 @@ import java.util.Comparator;
 public class Europe {
 
 	/** Width and Height of Europe. */
-	public static int N = 10, M = 10;
+	public static int Width_OF_Europe = 10, Height_OF_Europe = 10;
 	/** The same as the number of countries. */
 	public static int CountCoinTypes;
 
@@ -16,7 +16,7 @@ public class Europe {
 	private int day = 1;					// Current day
 	
 	public Europe(String data) {
-		cities = new City[N][M];
+		cities = new City[Width_OF_Europe][Height_OF_Europe];
 		countries = new ArrayList<>();
 		
 		String[] args = data.split("\n");
@@ -37,16 +37,16 @@ public class Europe {
 	
 	public void nextDay(){
 		// Coins Diffusion
-		for(int i=0; i<M; i++){
-			for(int j=0; j<N; j++){
+		for(int i=0; i<Height_OF_Europe; i++){
+			for(int j=0; j<Width_OF_Europe; j++){
 				if(cities[i][j]!=null){
 					if(i-1>=0 && cities[i-1][j]!=null) {
 						cities[i-1][j].putCoins(cities[i][j].getCoins());
 					}
-					if(j+1<N && cities[i][j+1]!=null){
+					if(j+1<Width_OF_Europe && cities[i][j+1]!=null){
 						cities[i][j+1].putCoins(cities[i][j].getCoins());
 					}
-					if(i+1<M && cities[i+1][j]!=null){
+					if(i+1<Height_OF_Europe && cities[i+1][j]!=null){
 						cities[i+1][j].putCoins(cities[i][j].getCoins());
 					}
 					if(j-1>=0 && cities[i][j-1]!=null){
@@ -100,8 +100,8 @@ public class Europe {
 	}
 	
 	public void showInConsole(){
-		for(int i=M-1; i>=0; i--){
-			for(int j=0; j<N; j++){
+		for(int i=Height_OF_Europe-1; i>=0; i--){
+			for(int j=0; j<Width_OF_Europe; j++){
 				System.out.print(cities[i][j] != null ? cities[i][j] : " ");
 			}
 			System.out.println();

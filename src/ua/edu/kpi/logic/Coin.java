@@ -6,16 +6,13 @@ public class Coin {
 	private int count;
 	
 	public Coin(Country country, int count){
-		setCountry(country);
 		setCount(count);
+		
+		this.country = country;
 	}
 	
 	public Country getCountry() {
 		return country;
-	}
-
-	public void setCountry(Country type) {
-		this.country = type;
 	}
 
 	public int getCount() {

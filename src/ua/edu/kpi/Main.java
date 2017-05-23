@@ -8,56 +8,57 @@ import java.util.List;
 import ua.edu.kpi.logic.Europe;
 
 public class Main {
-	
+
 	public static void main(String[] args) {
-		
+
 		int i = 1;
-		List<String> europeanStates = getEuopeanStatesFromFile("input.txt");
-		
-		for(String data : europeanStates){
+		List<String> europeanStates = getEuopeanCountryFromFile("input.txt");
+
+		for (String data : europeanStates) {
 			System.out.println("Case number " + i++ + ":");
-			
+
 			Europe europe = new Europe(data);
-			
-			do{
+
+			do {
 				europe.nextDay();
-			} while(!europe.isCompleted());
-			
+			} while (!europe.isCompleted());
+
 			europe.showResult();
 		}
-		
+
 	}
-	
-	public static List<String> getEuopeanStatesFromFile(String fileName){
+
+	public static List<String> getEuopeanCountryFromFile(String fileName) {
 
 		List<String> europeanStates = new ArrayList<>();
 		File inputFile = new File(fileName);
-		
-		if(inputFile.exists()){
-			try{
+
+		if (inputFile.exists()) {
+			try {
 				List<String> lines = Files.readAllLines(inputFile.toPath());
 				String currentState = "";
-				
-				for(String currentLine : lines){
-					if(currentLine.chars().allMatch( Character::isDigit )){
-						if(currentState != ""){
+
+				for (String currentLine : lines) {
+					if (currentLine.chars().allMatch(Character::isDigit)) {
+						if (currentState != "") {
 							europeanStates.add(currentState);
 						}
 
-						currentState=currentLine;
-					}else{
+						currentState = currentLine;
+					} 
+					else {
 						currentState += "\n" + currentLine;
 					}
 				}
-			}
-			catch(Exception exception){
+			} 
+			catch (Exception exception) {
 				System.err.println(exception.getMessage());
 			}
-		}
-		else{
+		} 
+		else {
 			System.err.println(fileName + " does not exist!");
 		}
-		
+
 		return europeanStates;
 	}
 

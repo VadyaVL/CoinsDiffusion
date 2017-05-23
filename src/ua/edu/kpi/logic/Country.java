@@ -9,25 +9,13 @@ public class Country {
 	private boolean isCompleted = false;
 	
 	public Country(String name, int xld, int yld, int xru, int yru){
-		setName(name);
-		setXld(xld);
-		setYld(yld);
-		setXru(xru);
-		setYru(yru);
+		this.name = name;
+		this.xld = xld;
+		this.yld = yld;
+		this.xru = xru;
+		this.yru = yru;
 	}
 
-	@Override
-    public boolean equals(Object obj) {
-		
-		if(obj instanceof Country){
-			if(this.name == ((Country)obj).name){
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
 	public boolean isCompleted() {
 		return isCompleted;
 	}
@@ -38,10 +26,6 @@ public class Country {
 
 	public String getName() {
 		return name;
-	}
-
-	private void setName(String name) {
-		this.name = name;
 	}
 	
 	public int getEndDay() {
@@ -56,32 +40,15 @@ public class Country {
 		return xld;
 	}
 
-	private void setXld(int xld) {
-		this.xld = xld;
-	}
-
 	public int getYld() {
 		return yld;
-	}
-
-	private void setYld(int yld) {
-		this.yld = yld;
 	}
 
 	public int getXru() {
 		return xru;
 	}
-
-	private void setXru(int xru) {
-		this.xru = xru;
-	}
-
+	
 	public int getYru() {
 		return yru;
 	}
-
-	private void setYru(int yru) {
-		this.yru = yru;
-	}
-	
 }

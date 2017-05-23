@@ -9,7 +9,7 @@ public class City {
 	private boolean completed = false;
 	
 	public City(Country country){
-		setCountry(country);
+		this.country = country;
 		coins = new ArrayList<Coin>();
 		coins.add(new Coin(country, 1000000));
 		
@@ -22,7 +22,7 @@ public class City {
 		ArrayList<Coin> coinsGorSend = new ArrayList<>();
 		
 		for(Coin coin : coins){
-			int countCoin = coin.getCount()/1000;	//  Цілочисельне ділення
+			int countCoin = coin.getCount()/1000;
 			if(countCoin == 0){
 				continue;
 			}
@@ -59,17 +59,9 @@ public class City {
 	public Country getCountry() {
 		return country;
 	}
-
-	public void setCountry(Country country) {
-		this.country = country;
-	}
 	
 	public boolean isCompleted() {
 		return completed;
-	}
-
-	public void setCompleted(boolean areCompleted) {
-		this.completed = areCompleted;
 	}
 
 	@Override
