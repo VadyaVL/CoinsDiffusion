@@ -1,3 +1,7 @@
+/**
+ * @author Vadym. Email: vadyavl@gmail.com
+ * @since 1.0
+ */
 package ua.edu.kpi;
 
 import java.io.File;
@@ -7,27 +11,40 @@ import java.util.List;
 
 import ua.edu.kpi.logic.Europe;
 
+/**
+ * Class - the entry point into the program.
+ * @author Vadym
+ * @since 1.0
+ */
 public class Main {
-
+	
+	/**
+	 * Method - the entry point into the program.
+	 * @param args
+	 */
 	public static void main(String[] args) {
-
-		int i = 1;
+		
 		List<String> europeanStates = getEuopeanCountryFromFile("input.txt");
+		int i = 1;
 
 		for (String data : europeanStates) {
-			System.out.println("Case number " + i++ + ":");
-
 			Europe europe = new Europe(data);
 
 			do {
 				europe.nextDay();
 			} while (!europe.isCompleted());
 
+			System.out.println("Case number " + i + ":");
 			europe.showResult();
+			i = i + 1;
 		}
-
 	}
-
+	
+	/**
+	 * Get List data foreach Europe case.
+	 * @param fileName File with data about Europe cases.
+	 * @return
+	 */
 	public static List<String> getEuopeanCountryFromFile(String fileName) {
 
 		List<String> europeanStates = new ArrayList<>();

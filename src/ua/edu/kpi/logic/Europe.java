@@ -1,20 +1,33 @@
+/**
+ * @author Vadym. Email: vadyavl@gmail.com
+ * @since 1.0
+ */
 package ua.edu.kpi.logic;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Europe - The class that contains a list of countries and their settlements. Implements the logic of coins spread across Europe.
+ * @author Vadym
+ * @since 1.0
+ */
 public class Europe {
 
 	/** Width and Height of Europe. */
-	public static int Width_OF_Europe = 10, Height_OF_Europe = 10;
+	public final static int Width_OF_Europe = 10, Height_OF_Europe = 10;
 	/** The same as the number of countries. */
 	public static int CountCoinTypes;
 
 	private ArrayList<Country> countries; 	// List of all countries of Europe.
 	private City[][] cities; 				// Array of all cities of Europe.
-	private boolean completed = false;		// Ñompletion flag
-	private int day = 1;					// Current day
+	private boolean completed = false;		// End of algorithm
+	private int day = 1;					// Current day/iteration of algorithm
 	
+	/**
+	 * Constructor of Europe
+	 * @param data String with information about countries
+	 */
 	public Europe(String data) {
 		cities = new City[Width_OF_Europe][Height_OF_Europe];
 		countries = new ArrayList<>();
@@ -22,21 +35,26 @@ public class Europe {
 		String[] args = data.split("\n");
 		CountCoinTypes = Integer.parseInt(args[0]);
 
-		for(int c=1; c<=CountCoinTypes; c++) {
+		for(int c = 1; c <= CountCoinTypes; c++) {
 			String[] cArgs = args[c].split(" ");
-			Country country = new Country(cArgs[0], Integer.parseInt(cArgs[1]), Integer.parseInt(cArgs[2]), 
-													Integer.parseInt(cArgs[3]), Integer.parseInt(cArgs[4]));
+			int left = Integer.parseInt(cArgs[1]), down = Integer.parseInt(cArgs[2]), 
+				right = Integer.parseInt(cArgs[3]), up = Integer.parseInt(cArgs[4]);
+			Country country = new Country(cArgs[0], left, down, right, up);
 			countries.add(country);
-			for(int i=country.getYld()-1; i<country.getYru(); i++){
-				for(int j=country.getXld()-1; j<country.getXru(); j++){
+			
+			for(int i = down-1; i < up; i++){
+				for(int j = left-1; j < right; j++){
 					cities[i][j] = new City(country);
 				}
 			}
 		}
 	}
 	
+	/**
+	 * Make next iteration. Iteration = one day.
+	 */
 	public void nextDay(){
-		// Coins Diffusion
+		// Coins Diffusion foreach neighbor send coins
 		for(int i=0; i<Height_OF_Europe; i++){
 			for(int j=0; j<Width_OF_Europe; j++){
 				if(cities[i][j]!=null){
@@ -58,22 +76,7 @@ public class Europe {
 		
 		// Check the country at the completed
 		for(Country country: countries){
-			boolean completed = true;
-			
-			for(int i=country.getYld()-1; i<country.getYru(); i++){
-				for(int j=country.getXld()-1; j<country.getXru(); j++){
-					if(cities[i][j].getCountry().equals(country)){
-						if(!cities[i][j].isCompleted()){
-							completed = false;
-						}
-					}
-				}
-			}
-			
-			if(!country.isCompleted() && completed){
-				country.setCompleted(completed);
-				country.setEndDay(day);
-			}
+			country.checkCountryOnComplete(cities, day);
 		}
 		
 		// Check conditions completion
@@ -86,11 +89,15 @@ public class Europe {
 			}
 		}
 		
+		// Next day
 		if(!completed){
 			day++;
 		}
 	}
 	
+	/**
+	 * The output results of the program in console.
+	 */
 	public void showResult(){
 		countries.sort(comparator);
 		
@@ -99,6 +106,9 @@ public class Europe {
 		}
 	}
 	
+	/**
+	 * Show Europe square in console.
+	 */
 	public void showInConsole(){
 		for(int i=Height_OF_Europe-1; i>=0; i--){
 			for(int j=0; j<Width_OF_Europe; j++){
@@ -108,11 +118,18 @@ public class Europe {
 		}
 	}
 	
-
+	/**
+	 * 
+	 * @return The end of the algorithm. true - coins spread all cities.
+	 */
 	public boolean isCompleted() {
 		return completed;
 	}
 	
+	/**
+	 * Comparator for sorting method. The result should be sorted EndDay / FinalDay.
+	 * EndDay / FinalDay - the day when in every city of the country will all coins.
+	 */
 	private Comparator<Country> comparator = new Comparator<Country>() {
 		
 		@Override
