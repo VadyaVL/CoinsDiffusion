@@ -24,7 +24,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		List<String> europeanStates = getEuopeanCountryFromFile("input.txt");
+		List<String> europeanStates = getEuropeanCountryFromFile("input.txt");
 		int i = 1;
 
 		for (String data : europeanStates) {
@@ -45,7 +45,7 @@ public class Main {
 	 * @param fileName File with data about Europe cases.
 	 * @return
 	 */
-	public static List<String> getEuopeanCountryFromFile(String fileName) {
+	public static List<String> getEuropeanCountryFromFile(String fileName) {
 
 		List<String> europeanStates = new ArrayList<>();
 		File inputFile = new File(fileName);

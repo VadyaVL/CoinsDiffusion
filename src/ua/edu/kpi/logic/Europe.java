@@ -15,7 +15,7 @@ import java.util.Comparator;
 public class Europe {
 
 	/** Width and Height of Europe. */
-	public final static int Width_OF_Europe = 10, Height_OF_Europe = 10;
+	public final static int Width = 10, Height = 10;
 	/** The same as the number of countries. */
 	public static int CountCoinTypes;
 
@@ -29,7 +29,7 @@ public class Europe {
 	 * @param data String with information about countries
 	 */
 	public Europe(String data) {
-		cities = new City[Width_OF_Europe][Height_OF_Europe];
+		cities = new City[Width][Height];
 		countries = new ArrayList<>();
 		
 		String[] args = data.split("\n");
@@ -55,16 +55,16 @@ public class Europe {
 	 */
 	public void nextDay(){
 		// Coins Diffusion foreach neighbor send coins
-		for(int i=0; i<Height_OF_Europe; i++){
-			for(int j=0; j<Width_OF_Europe; j++){
+		for(int i=0; i<Height; i++){
+			for(int j=0; j<Width; j++){
 				if(cities[i][j]!=null){
 					if(i-1>=0 && cities[i-1][j]!=null) {
 						cities[i-1][j].putCoins(cities[i][j].getCoins());
 					}
-					if(j+1<Width_OF_Europe && cities[i][j+1]!=null){
+					if(j+1<Width && cities[i][j+1]!=null){
 						cities[i][j+1].putCoins(cities[i][j].getCoins());
 					}
-					if(i+1<Height_OF_Europe && cities[i+1][j]!=null){
+					if(i+1<Height && cities[i+1][j]!=null){
 						cities[i+1][j].putCoins(cities[i][j].getCoins());
 					}
 					if(j-1>=0 && cities[i][j-1]!=null){
@@ -110,8 +110,8 @@ public class Europe {
 	 * Show Europe square in console.
 	 */
 	public void showInConsole(){
-		for(int i=Height_OF_Europe-1; i>=0; i--){
-			for(int j=0; j<Width_OF_Europe; j++){
+		for(int i=Height-1; i>=0; i--){
+			for(int j=0; j<Width; j++){
 				System.out.print(cities[i][j] != null ? cities[i][j] : " ");
 			}
 			System.out.println();
